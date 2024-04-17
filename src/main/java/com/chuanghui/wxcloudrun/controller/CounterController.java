@@ -72,4 +72,9 @@ public class CounterController {
             return ApiResponse.error("参数action错误");
         }
     }
+
+    @PostMapping("/api/hello")
+    ApiResponse hello() {
+        return ApiResponse.ok("hello");
+    }
 }
