@@ -4,8 +4,6 @@ import com.chuanghui.wxcloudrun.dto.CounterRequest;
 import com.chuanghui.wxcloudrun.model.Counter;
 import com.chuanghui.wxcloudrun.service.CounterService;
 import com.chuanghui.wxcloudrun.util.ApiResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,11 +19,9 @@ import java.util.Optional;
 public class CounterController {
 
     final CounterService counterService;
-    final Logger logger;
 
     public CounterController(@Autowired CounterService counterService) {
         this.counterService = counterService;
-        this.logger = LoggerFactory.getLogger(CounterController.class);
     }
 
 
@@ -36,7 +32,6 @@ public class CounterController {
      */
     @GetMapping(value = "/api/count")
     ApiResponse get() {
-        logger.info("/api/count get request");
         Optional<Counter> counter = counterService.getCounter(1);
         Integer count = 0;
         if (counter.isPresent()) {
@@ -55,7 +50,6 @@ public class CounterController {
      */
     @PostMapping(value = "/api/count")
     ApiResponse create(@RequestBody CounterRequest request) {
-        logger.info("/api/count post request, action: {}", request.getAction());
 
         Optional<Counter> curCounter = counterService.getCounter(1);
         if (request.getAction().equals("inc")) {
