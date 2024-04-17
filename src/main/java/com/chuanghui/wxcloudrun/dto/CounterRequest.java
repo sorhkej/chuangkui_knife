@@ -1,4 +1,4 @@
-package com.tencent.wxcloudrun.dto;
+package com.chuanghui.wxcloudrun.dto;
 
 import lombok.Data;
 

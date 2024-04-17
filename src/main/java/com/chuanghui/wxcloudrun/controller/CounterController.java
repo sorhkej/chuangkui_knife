@@ -1,9 +1,9 @@
-package com.tencent.wxcloudrun.controller;
+package com.chuanghui.wxcloudrun.controller;
 
-import com.tencent.wxcloudrun.config.ApiResponse;
-import com.tencent.wxcloudrun.dto.CounterRequest;
-import com.tencent.wxcloudrun.model.Counter;
-import com.tencent.wxcloudrun.service.CounterService;
+import com.chuanghui.wxcloudrun.dto.CounterRequest;
+import com.chuanghui.wxcloudrun.model.Counter;
+import com.chuanghui.wxcloudrun.service.CounterService;
+import com.chuanghui.wxcloudrun.util.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +69,7 @@ public class CounterController {
             counterService.upsertCount(counter);
             return ApiResponse.ok(count);
         } else if (request.getAction().equals("clear")) {
-            if (!curCounter.isPresent()) {
+            if (curCounter.isEmpty()) {
                 return ApiResponse.ok(0);
             }
             counterService.clearCount(1);
@@ -78,10 +78,4 @@ public class CounterController {
             return ApiResponse.error("参数action错误");
         }
     }
-
-    @PostMapping("/api/env")
-    ApiResponse env(@RequestBody CounterRequest request){
-        return ApiResponse.ok(System.getenv());
-    }
-
 }
