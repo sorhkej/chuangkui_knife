@@ -79,7 +79,8 @@ public class CounterController {
         }
     }
 
-    ApiResponse env(){
+    @PostMapping("/api/env")
+    ApiResponse env(@RequestBody CounterRequest request){
         return ApiResponse.ok(System.getenv());
     }
 
